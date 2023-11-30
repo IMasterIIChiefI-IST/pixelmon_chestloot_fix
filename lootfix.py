@@ -17,7 +17,7 @@ def edit_json_files(folder_path):
                 for pool in data.get("pools", []):
                     try:
                         try:
-                            if pool['rools']['min'] == pool['rools']['max']:
+                            if pool['rools']['min'] == pool['rools']['max'] == 1:
                                 pass
                             else:
                                 if pool['rools']['min'] > 1:
@@ -26,9 +26,10 @@ def edit_json_files(folder_path):
                                     pool['rools']['max'] = int(pool['rools']['max'] // 2)
                         except:
                             if pool['rools'] > 1:
-                                pool['rools'] = pool['rools'] // 2
+                                pool['rools'] = int(pool['rools'] // 2)
                     except:
                         print("no rools found")
+
                     for entry in pool['entries']:
                         if entry['type'] == "empty":
                             entry['weight'] = entry['weight'] * 4
@@ -41,7 +42,7 @@ def edit_json_files(folder_path):
                         try:
                             for func in entry["functions"]:
                                 try:
-                                    if func["count"]['min'] == func["count"]['max']:
+                                    if func["count"]['min'] == func["count"]['max'] == 1:
                                         pass
                                     else:
                                         if func["count"]['min'] > 1:
@@ -63,7 +64,7 @@ def main():
     parser.add_argument('-f', '--folder', required=True, help='Root folder containing JSON files.')
     args = parser.parse_args()
     root_folder = args.folder
-    paths = ["\\data\\pixelmon\\loot_tables", "\\data\\minecraft\\loot_tables"]
+    paths = ["data\\pixelmon\\loot_tables", "data\\minecraft\\loot_tables"]
     for path in paths:
         edit_json_files(os.path.join(root_folder, path))
 
