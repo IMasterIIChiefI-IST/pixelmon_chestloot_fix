@@ -48,7 +48,10 @@ def edit_json_files(folder_path):
                                         if func["count"]['min'] > 1:
                                             func["count"]['min'] = 0.0
                                         if func["count"]['max'] > 1:
-                                            func["count"]['max'] = float(func["count"]['max'] // 2)
+                                            if func["count"]['max'] // 4 == 0:
+                                                func["count"]['max'] = float(func["count"]['max'] // 2)
+                                            else:
+                                                func["count"]['max'] = float(func["count"]['max'] // 4)
                                 except:
                                     if func["count"] > 1:
                                         func["count"] = int(func["count"] // 2)
